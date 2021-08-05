@@ -25,7 +25,9 @@ public class MsgProducer implements RabbitTemplate.ConfirmCallback, RabbitTempla
     @Autowired
     public MsgProducer(RabbitTemplate rabbitTemplate) {
         this.rabbitTemplate = rabbitTemplate;
+        // 设置确认模式 producer-> exchange
         rabbitTemplate.setConfirmCallback(this);
+        // exchange -> queue
         rabbitTemplate.setReturnCallback(this);
     }
 
