@@ -1,6 +1,9 @@
 package com.example.rabbitmq.demo.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.*;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
+import org.springframework.amqp.support.converter.MessageConverter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,6 +20,7 @@ public class RabbitConfig2 {
 
     /**
      * 队列1
+     *
      * @return
      */
     @Bean
@@ -26,6 +30,7 @@ public class RabbitConfig2 {
 
     /**
      * 队列2
+     *
      * @return
      */
     @Bean
@@ -36,6 +41,7 @@ public class RabbitConfig2 {
 
     /**
      * topic交换器
+     *
      * @return
      */
     @Bean
@@ -45,6 +51,7 @@ public class RabbitConfig2 {
 
     /**
      * 绑定路由队列1
+     *
      * @return
      */
     @Bean
@@ -54,6 +61,7 @@ public class RabbitConfig2 {
 
     /**
      * 绑定路由队列2
+     *
      * @return
      */
     @Bean
@@ -63,6 +71,7 @@ public class RabbitConfig2 {
 
     /**
      * dlx死信路由
+     *
      * @return
      */
     @Bean
@@ -72,6 +81,7 @@ public class RabbitConfig2 {
 
     /**
      * 生产死信的队列
+     *
      * @return
      */
     @Bean
@@ -86,6 +96,7 @@ public class RabbitConfig2 {
 
     /**
      * 绑定 消费死信的队列 和 死信路由
+     *
      * @return
      */
     @Bean
@@ -96,10 +107,19 @@ public class RabbitConfig2 {
 
     /**
      * 绑定 产生死信的队列和任意一个路由
+     *
      * @return
      */
     @Bean
     public Binding bindingProductExchange() {
         return BindingBuilder.bind(dtlQueue()).to(topicExchange()).with("test.dead.#");
     }
+
+
+    @Bean
+    public MessageConverter jsonMessageConverter(ObjectMapper objectMapper) {
+        return new Jackson2JsonMessageConverter(objectMapper);
+    }
+
+
 }

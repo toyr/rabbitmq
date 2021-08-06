@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -13,7 +14,7 @@ import java.util.Date;
  * @Description
  * @create 2021-08-06 11:22 上午
  */
-public class User {
+public class User implements Serializable {
     private Integer id;
     private String name;
     private String password;
