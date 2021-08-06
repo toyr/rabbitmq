@@ -3,7 +3,6 @@ package com.example.rabbitmq.demo.local;
 import com.example.rabbitmq.demo.domain.User;
 import org.springframework.amqp.rabbit.annotation.RabbitHandler;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,7 +16,12 @@ public class Recept {
     @RabbitListener(queues = "first")
     @RabbitHandler
     public void recept(User user) {
-        System.out.println("延迟队列消费时间：" + (System.currentTimeMillis() - user.getCreatTime()) + "ms");
+        if (user != null) {
+            if (user.getCreatTime() != null) {
+                System.out.println("延迟队列消费时间：" + (System.currentTimeMillis() - user.getCreatTime()) + "ms");
+            }
+            System.out.println("消费");
+        }
 
     }
 }
