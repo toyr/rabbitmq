@@ -97,27 +97,5 @@ public class RabbitConfig {
     }
 
 
-    /*@Resource
-    private RabbitTemplate rabbitTemplate;
-
-    @Bean
-    public RabbitTemplate rabbitTemplate() {
-        // 消息返回, yml需要配置 publisher-returns: true
-        rabbitTemplate.setMandatory(true);
-        rabbitTemplate.setReturnCallback((message, replyCode, replyText, exchange, routingKey) -> {
-            String correlationId = message.getMessageProperties().getCorrelationIdString();
-            log.debug("消息：{} 发送失败, 应答码：{} 原因：{} 交换机: {}  路由键: {}", correlationId, replyCode, replyText, exchange, routingKey);
-        });
-
-        // 消息确认, yml需要配置 publisher-confirms: true
-        rabbitTemplate.setConfirmCallback((correlationData, ack, cause) -> {
-            if (ack) {
-                // log.debug("消息发送到exchange成功,id: {}", correlationData.getId());
-            } else {
-                log.debug("消息发送到exchange失败,原因: {}", cause);
-            }
-        });
-        return rabbitTemplate;
-    }*/
 
 }
